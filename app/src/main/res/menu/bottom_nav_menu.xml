@@ -4,15 +4,15 @@
 
     <item
         android:id="@+id/action_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/home" />
+        android:icon="@drawable/ic_instagram_home"
+        android:title="Home" />
     <item
         android:id="@+id/action_discover"
-        android:icon="@drawable/ic_apps_black_24dp"
-        android:title="@string/discover" />
+        android:icon="@drawable/ic_instagram_new_post"
+        android:title="Discover" />
     <item
         android:id="@+id/action_profile"
-        android:icon="@drawable/ic_person_black_24dp"
-        android:title="@string/profile" />
+        android:icon="@drawable/ic_instagram_profile"
+        android:title="Profile" />
 
 </menu>
