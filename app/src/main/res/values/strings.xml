@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Instagram</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <integer name="radius">15</integer>
+    <integer name="margin">15</integer>
+</resources>
