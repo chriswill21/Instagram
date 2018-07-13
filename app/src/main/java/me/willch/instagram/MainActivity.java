@@ -24,6 +24,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Check if user is already logged in, if so go straight to their page
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // do stuff with the user
+            Log.d("LoginActivity", "Login successful");
+            final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            // Continue to show the signup or login screen
+        }
+
         setContentView(R.layout.activity_main);
 
         usernameInput = findViewById(R.id.username_et);
@@ -79,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     private void signup(String username, String password) {
 
 
-        ParseUser user = new ParseUser();
+        final ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
 
@@ -93,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     message.show();
 
                     final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    intent.putExtra("userId", user.getObjectId());
                     startActivity(intent);
                     finish();
                 }

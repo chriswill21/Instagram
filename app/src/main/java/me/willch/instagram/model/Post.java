@@ -6,6 +6,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
@@ -48,12 +49,21 @@ public class Post extends ParseObject {
         return getString(KEY_DATE);
     }
 
+    public ParseFile getMedia() {
+        return getParseFile(KEY_IMAGE);
+    }
+
+    public void setMedia(ParseFile parseFile) {
+        put(KEY_IMAGE, parseFile);
+    }
+
     public static class Query extends ParseQuery<Post>{
         public Query() {
             super(Post.class);
         }
 
         public Query getTop() {
+            orderByDescending("createdAt");
             setLimit(20);
             return  this;
         }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/rl_root_one">
 
     <EditText
         android:id="@+id/username_et"
@@ -55,4 +56,6 @@
         android:text="SIGN UP"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="183dp" />
+
+
 </RelativeLayout>
