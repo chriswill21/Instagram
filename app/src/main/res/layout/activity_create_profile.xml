@@ -7,48 +7,47 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/description_et"
+        android:id="@+id/create_profile_name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="204dp"
+        android:layout_marginBottom="119dp"
         android:ems="10"
-        android:hint="Write a description..."
-        android:windowSoftInputMode="adjustResize"
+        android:hint="What's your name?"
         android:inputType="textPersonName"
+        android:windowSoftInputMode="adjustResize"
         tools:layout_editor_absoluteX="70dp"
         tools:layout_editor_absoluteY="55dp" />
 
     <Button
-        android:id="@+id/select_photo_btn"
+        android:id="@+id/create_profile_select_photo_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="75dp"
-        android:text="Take Photo"
+        android:layout_below="@+id/create_profile_ivImageProfilePic"
+        android:text="Take Profile Photo"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="188dp" />
 
     <Button
-        android:id="@+id/post_btn"
+        android:id="@+id/create_profile_done_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
-        android:text="Post"
+        android:layout_marginBottom="46dp"
+        android:text="Done"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="269dp" />
 
     <ImageView
-        android:id="@+id/ivImageToPost"
+        android:id="@+id/create_profile_ivImageProfilePic"
         android:layout_width="match_parent"
         android:layout_height="259dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/login_styles"
+        android:background="@color/blue_8"
         app:srcCompat="@drawable/camera_shadow_fill" />
 
 </RelativeLayout>

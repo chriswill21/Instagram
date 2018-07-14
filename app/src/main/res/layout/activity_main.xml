@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:id="@+id/rl_root_one">
+    android:id="@+id/rl_root_one"
+
+    android:background="@drawable/login_styles">
 
     <EditText
         android:id="@+id/username_et"
@@ -13,10 +15,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="123dp"
         android:hint="Username"
         android:inputType="text"
-
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp" />
 
@@ -26,10 +29,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="107dp"
+        android:layout_marginTop="188dp"
         android:hint="Password"
         android:inputType="text"
         android:password="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="95dp" />
 
@@ -40,8 +45,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="191dp"
+        android:layout_marginBottom="197dp"
+        android:background="#00FF0000"
         android:text="LOG IN"
+        android:textColor="@android:color/white"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="183dp" />
 
@@ -50,12 +57,31 @@
         android:id="@+id/signup_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="189dp"
+        android:background="#00FF0000"
         android:text="SIGN UP"
+        android:textColor="@android:color/white"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="183dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/ic_instagram_brand" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/signup_btn"
+        android:layout_centerHorizontal="true"
+        android:text="Don't have an account? Then:"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
 
 </RelativeLayout>

@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Check if user is already logged in, if so go straight to their page
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast message = Toast.makeText(getApplicationContext(), "This is a valid username and password", Toast.LENGTH_SHORT);
                     message.show();
 
-                    final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    final Intent intent = new Intent(MainActivity.this, CreateProfileActivity.class);
                     intent.putExtra("userId", user.getObjectId());
                     startActivity(intent);
                     finish();

@@ -13,13 +13,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import me.willch.instagram.model.Post;
 
 public class ProfileFragment extends Fragment {
@@ -32,6 +36,9 @@ public class ProfileFragment extends Fragment {
 
     // profile pic
     ImageView profilePic;
+
+    // parse file for profile pic
+    ParseFile profilePictureFile;
 
     // profile name
     TextView profileName;
@@ -63,11 +70,50 @@ public class ProfileFragment extends Fragment {
 
         currentUser.get("profilePicture");
 
-//        profilePic.setImageResource();
+        profilePictureFile = (ParseFile) currentUser.get("profilePicture");
+
+
+
+
+        // Set profile pic
+
+        int round_radius = 5;
+        int round_margin = 5;
+
+        final RoundedCornersTransformation roundedCornersTransformation = new RoundedCornersTransformation(round_radius, round_margin);
+
+        final RequestOptions requestOptions = RequestOptions.bitmapTransform(
+                roundedCornersTransformation
+        );
+
+        // get the correct place holder and image view for the current orientation
+        int placeholderId = R.drawable.ic_instagram_profile;
+
+        if (profilePictureFile!= null) {
+            Glide.with(profilePic.getContext())
+                    .load(profilePictureFile.getUrl())
+                    .apply(
+                            RequestOptions.placeholderOf(placeholderId)
+                                    .error(placeholderId)
+                                    .fitCenter()
+                    )
+                    .apply(requestOptions)
+                    .into(profilePic);
+        } else {
+            Glide.with(profilePic.getContext())
+                    .load(profilePictureFile)
+                    .apply(
+                            RequestOptions.placeholderOf(placeholderId)
+                                    .error(placeholderId)
+                                    .fitCenter()
+                    )
+                    .apply(requestOptions)
+                    .into(profilePic);
+        }
 
         // Set users name
         profileName = getActivity().findViewById(R.id.my_name);
-        profileName.setText(ParseUser.getCurrentUser().get("Name").toString());
+        profileName.setText(currentUser.get("Name").toString());
 
         // Set up recycler view and adapter
         rvPosts = view.findViewById(R.id.rv_profile_posts);

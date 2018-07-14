@@ -21,6 +21,8 @@ import me.willch.instagram.model.Post;
 
 public class RecyclerItemFragment extends Fragment {
 
+
+
     // list of posts
     final List<Post> posts = new ArrayList<>();
 
@@ -109,5 +111,6 @@ public class RecyclerItemFragment extends Fragment {
             }
         });
     }
+
 
 }

@@ -25,6 +25,7 @@ public class DetailsActivity extends AppCompatActivity {
     public TextView tvBody;
     public TextView tvDate;
     public Post post;
+    public TextView likes;
 
 
     @Override
@@ -37,11 +38,13 @@ public class DetailsActivity extends AppCompatActivity {
         tvDate = (TextView) findViewById(R.id.tvDate);
         ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
         ivPostImage = (ImageView) findViewById(R.id.ivPostImage);
+        likes = (TextView) findViewById(R.id.tv_details_likes);
 
         tvUsername.setText(getIntent().getStringExtra("UserName"));
         tvBody.setText(getIntent().getStringExtra("Body"));
         tvDate.setText(getIntent().getStringExtra("Date"));
         post = Parcels.unwrap(getIntent().getParcelableExtra("Post"));
+        likes.setText(post.getPostLIikes() + " Likes");
 
 
         int round_radius = getBaseContext().getResources().getInteger(R.integer.radius);
@@ -59,7 +62,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         try {
             Glide.with(ivProfileImage.getContext())
-                    .load(post.getUser().fetchIfNeeded().getParseFile("profilePicture"))
+                    .load(post.getUser().fetchIfNeeded().getParseFile("profilePicture").getUrl())
                     .apply(
                             RequestOptions.placeholderOf(placeholderId)
                                     .error(placeholderId)

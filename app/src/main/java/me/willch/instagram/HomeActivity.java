@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.parse.GetCallback;
+import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -239,10 +240,18 @@ public class HomeActivity extends AppCompatActivity implements ComposeFragment.C
 
     public void  logOut() {
         Log.d("Logout", "Logged out");
-        ParseUser.logOut();
-        final Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        ParseUser.logOutInBackground(new LogOutCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    final Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Log.e("Log Out Error!", "User wasn't logged out!");
+                }
+            }
+        });
 
     }
 

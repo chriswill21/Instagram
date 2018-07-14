@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="176dp"
+            android:layout_marginBottom="154dp"
             android:autoLink="all"
             android:linksClickable="true"
             android:text="TextView" />
@@ -55,11 +55,11 @@
         <TextView
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tvBody"
-            android:layout_marginTop="-176dp"
-            android:text="Comments will be here" />
+            android:layout_marginTop="-154dp"
+            android:text="Time" />
 
 
         <ImageView
@@ -69,6 +69,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="81dp"
+            android:scaleType="centerCrop"
             app:srcCompat="@android:color/black" />
 
         <ImageButton
@@ -78,6 +79,7 @@
             android:layout_marginTop="4dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/ivPostImage"
+            android:background="@android:color/white"
             card_view:srcCompat="@drawable/ic_heart_outline_24dp" />
 
         <ImageButton
@@ -88,6 +90,7 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/ivPostImage"
             android:layout_marginEnd="12dp"
+            android:background="@android:color/white"
             app:srcCompat="@drawable/ic_bookmark" />
 
         <ImageButton
@@ -97,6 +100,7 @@
             android:layout_below="@+id/ivPostImage"
             android:layout_marginTop="4dp"
             android:layout_toEndOf="@+id/ivProfileImage"
+            android:background="@android:color/background_light"
             card_view:srcCompat="@drawable/direct" />
 
         <ImageButton
@@ -107,7 +111,17 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_toEndOf="@+id/ib_like"
+            android:background="@android:color/white"
             card_view:srcCompat="@drawable/ic_comment" />
+
+        <TextView
+            android:id="@+id/tv_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ib_like"
+            android:onClick="likePost"
+            android:text="0 Likes" />
 
 
     </RelativeLayout>

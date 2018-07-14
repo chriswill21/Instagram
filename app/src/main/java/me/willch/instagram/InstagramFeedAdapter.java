@@ -4,12 +4,14 @@ package me.willch.instagram;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +31,10 @@ import me.willch.instagram.model.Post;
 public class InstagramFeedAdapter extends RecyclerView.Adapter<InstagramFeedAdapter.ViewHolder> {
 //public class TweetAdapter extends ListAdapter<Tweet, TweetAdapter.ViewHolder> {
 
+
+
+
+
     private final Activity activity;
     private List<Post> mPosts;
 
@@ -41,6 +47,7 @@ public class InstagramFeedAdapter extends RecyclerView.Adapter<InstagramFeedAdap
     // for each row, inflate
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -52,10 +59,10 @@ public class InstagramFeedAdapter extends RecyclerView.Adapter<InstagramFeedAdap
     // bind the values based on the position of the element
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         // get the data according to the position
-        Post post = mPosts.get(position);
+        final Post post = mPosts.get(position);
 
         // populate the view according to this data
         try {
@@ -67,6 +74,32 @@ public class InstagramFeedAdapter extends RecyclerView.Adapter<InstagramFeedAdap
 //        holder.tvDate.setText(getRelativeTimeAgo(post.createdAt()));
         holder.post = post;
 
+        // handle post likes
+        final String postLikes = post.getPostLIikes();
+
+        if (postLikes != null) {
+            if (Integer.valueOf(postLikes) != 0) {
+                holder.tvLikes.setText(postLikes + " Likes");
+            }
+        }
+        holder.ibLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.ibLikes.setColorFilter(Color.RED);
+                int numLikes;
+                if (post.getPostLIikes() == null){
+                    numLikes = 0;
+                } else {
+                    numLikes = Integer.valueOf(post.getPostLIikes());
+                }
+                post.setLikes(Integer.toString(numLikes + 1));
+                post.saveInBackground();
+
+            }
+        });
+
+        //
+        holder.tvDate.setText(post.getCreatedAt().toString());
 
         int round_radius = context.getResources().getInteger(R.integer.radius);
         int round_margin = context.getResources().getInteger(R.integer.margin);
@@ -82,16 +115,29 @@ public class InstagramFeedAdapter extends RecyclerView.Adapter<InstagramFeedAdap
         int placeholderId = R.drawable.ic_instagram_profile;
         ImageView imageView = holder.ivProfileImage;
 
+
         try {
-            Glide.with(holder.itemView.getContext())
-                    .load(post.getUser().fetchIfNeeded().getParseFile("profilePicture"))
-                    .apply(
-                            RequestOptions.placeholderOf(placeholderId)
-                                    .error(placeholderId)
-                                    .fitCenter()
-                    )
-                    .apply(requestOptions)
-                    .into(imageView);
+            if (post.getUser().fetchIfNeeded().getParseFile("profilePicture")!= null) {
+                Glide.with(holder.itemView.getContext())
+                        .load(post.getUser().fetchIfNeeded().getParseFile("profilePicture").getUrl())
+                        .apply(
+                                RequestOptions.placeholderOf(placeholderId)
+                                        .error(placeholderId)
+                                        .fitCenter()
+                        )
+                        .apply(requestOptions)
+                        .into(imageView);
+            } else {
+                Glide.with(holder.itemView.getContext())
+                        .load(post.getUser().fetchIfNeeded().getParseFile("profilePicture"))
+                        .apply(
+                                RequestOptions.placeholderOf(placeholderId)
+                                        .error(placeholderId)
+                                        .fitCenter()
+                        )
+                        .apply(requestOptions)
+                        .into(imageView);
+            }
         } catch (com.parse.ParseException e) {
             e.printStackTrace();
         }
@@ -118,8 +164,10 @@ public class InstagramFeedAdapter extends RecyclerView.Adapter<InstagramFeedAdap
         public ImageView ivProfileImage;
         public ImageView ivPostImage;
         public TextView tvUsername;
+        public ImageView ibLikes;
         public TextView tvBody;
         public TextView tvDate;
+        public TextView tvLikes;
         public Post post;
         private final int REQUEST_CODE = 21;
 
@@ -135,6 +183,8 @@ public class InstagramFeedAdapter extends RecyclerView.Adapter<InstagramFeedAdap
             tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvDate = (TextView) itemView.findViewById(R.id.tvDate);
+            tvLikes = (TextView) itemView.findViewById(R.id.tv_likes);
+            ibLikes = (ImageButton) itemView.findViewById(R.id.ib_like);
 
             itemView.setOnClickListener(this);
 //            itemView.setOnLongClickListener(this);
